@@ -1,7 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';
-import './index.css'; // Import global styles (create this file)
+//import './index.css'; // Import global styles (create this file)
 
 // Find the root div in the HTML
 const container = document.getElementById('root');

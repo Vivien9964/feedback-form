@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './FeedbackForm.css';
 
 function FeedbackForm() {
   // State for form fields (name, email, rating, comment)
@@ -12,12 +13,16 @@ function FeedbackForm() {
   // State for form errors
   const [errors, setErrors] = useState({});
 
+  // State for form submission
+  const [submitted, setSubmitted] = useState(false);
+
+  const isFormValid = form.name && form.email && form.rating && Object.keys(errors).length === 0;
+
   // Function to handle input changes
   const handleChange = (e) => {
      const {name, value} = e.target;
      setForm({...form, [name]: value})
   };
-
 
   // Function to validate form fields
   const validate = (form) => {
@@ -32,14 +37,7 @@ function FeedbackForm() {
     } else if(!isValidName(name)){
       validationSummary.name = "Name is not valid!";
     }
-
-
-    // Helper function to validate name
-    function isValidName(name) {
-      const validName = /^[a-zA-Z\s\-']+$/;
-      return validName.test(name);
-    }
-
+    
     // Check for an empty email field / validate email if exists with a helper function
     if(!email.trim()) {
       validationSummary.email = "Email is required!";
@@ -47,35 +45,68 @@ function FeedbackForm() {
       validationSummary.email = "Email is not valid!";
     }
 
-
-    // Check for empty rating
+    // Check if rating was selected
+    if(!rating) {
+      validationSummary.rating = "Please select a rating!";
+    }
   
-
     return validationSummary;
   };
 
+  // Helper function to validate name
+  function isValidName(name) {
+    const validName = /^[a-zA-Z\s\-']+$/;
+    return validName.test(name);
+  }
 
   // Helper function to validate email with regular expression
   function isValidEmail(email) {
-    // allow first part to start with lowercase letter, continue with letters / numbers
-    // allow special character '@', and after domain name 
-    const validEmail = /^[a-z][a-z0-9]*@[a-z]+\.[a-z]+$/;
+    const validEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return validEmail.test(email); 
   }
 
 
   // Function to handle form submission
+  // Showing errors after submit
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Start form validation
     const errors = validate(form);
+
+    // If errors found, update error state
     if(Object.keys(errors).length > 0){
       setErrors(errors);
       return;
+
+    } else {
+
+      // If no errors found, reset inputs and errors states after submission
+      setSubmitted(true);
+      setForm({ name: '', email: '', rating: '', comment: ''});
+      setErrors({});
     }
   };
 
   return (
-    <form className="feedback-form" onSubmit={handleSubmit}>
+
+  <div className="main-container">
+
+    {submitted ? (
+
+
+      <div className="success-message">
+         <p>Submission successful!</p>
+
+        <button onClick={() => setSubmitted(false)}>Submit another</button>
+
+      </div>
+     
+
+    ) : (
+
+      <form className="feedback-form" onSubmit={handleSubmit}>
+
       {/* Name field */}
       <div>
         <label htmlFor="name">Name:</label>
@@ -116,7 +147,7 @@ function FeedbackForm() {
             <option key={num} value={num}>{num}</option>
           ))}
         </select>
-        {/* TODO: Show error for rating if present */}
+        {errors.rating && <span>{errors.rating}</span>}
       </div>
 
       {/* Comment field */}
@@ -128,12 +159,15 @@ function FeedbackForm() {
           value={form.comment}
           onChange={handleChange}
         />
-        {/* TODO: Show error for comment if present */}
       </div>
 
       {/* Submit button */}
-      <button type="submit">Submit Feedback</button>
+      <button type="submit" disabled={!isFormValid}>Submit Feedback</button>
     </form>
+    )}
+
+  </div>
+    
   );
 }
 

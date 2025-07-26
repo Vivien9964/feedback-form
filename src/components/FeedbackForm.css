@@ -1,35 +1,158 @@
-/* Styles for the FeedbackForm component. Customize as needed. */
+@import url('https://fonts.googleapis.com/css2?family=Creepster&family=EB+Garamond:wght@400;700&display=swap');
+
+body {
+  background: #f5e6d3; 
+  font-family: 'EB Garamond', serif;
+  color: #5d4e37; 
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-image: radial-gradient(circle at 50% 0%, #f7d794 0%, #f5e6d3 100%);
+}
+
+.main-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+}
+
 .feedback-form {
-  background: #fff;
-  padding: 2rem;
-  border-radius: 8px;
-  max-width: 400px;
-  margin: 2rem auto;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  background: #f7d794;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(210, 180, 140, 0.18), 0 0 0 8px #d2b48c;
+  padding: 2.5rem 2rem 2rem 2rem;
+  max-width: 420px;
+  width: 100%;
+  border: 2px solid #d2b48c; 
+  font-family: 'EB Garamond', serif;
+  position: relative;
 }
-.feedback-form div {
-  margin-bottom: 1rem;
+
+.feedback-form h1 {
+  font-family: 'Creepster', cursive;
+  color: #8b4513;
+  font-size: 2.2rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 8px #d2b48c, 0 0 2px #fff;
 }
+
 .feedback-form label {
   display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
+  font-weight: 700;
+  color: #8b4513; 
+  font-size: 1.1rem;
+  letter-spacing: 1px;
 }
+
 .feedback-form input,
 .feedback-form select,
 .feedback-form textarea {
   width: 100%;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 0.6rem 0.8rem;
+  border: 1.5px solid #d2b48c;
+  border-radius: 8px;
+  background: #f4e4bc;
+  font-size: 1rem;
+  font-family: 'EB Garamond', serif;
+  margin-bottom: 0.7rem;
+  transition: box-shadow 0.3s, border-color 0.3s;
+  box-shadow: 0 1px 4px #d2b48c;
 }
+
+.feedback-form input:focus,
+.feedback-form select:focus,
+.feedback-form textarea:focus {
+  outline: none;
+  border-color: #daa520;
+  box-shadow: 0 0 8px #daa520, 0 1px 4px #d2b48c;
+  background: #fff8dc;
+}
+
 .feedback-form button {
-  background: #007bff;
-  color: #fff;
+  background: #daa520;
+  color: #5d4e37;
   border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 4px;
+  border-radius: 10px;
+  padding: 0.8rem 1.7rem;
+  font-family: 'Creepster', cursive;
+  font-size: 1.3rem;
+  box-shadow: 0 2px 8px rgba(218, 165, 32, 0.18);
   cursor: pointer;
+  margin-top: 0.5rem;
+  letter-spacing: 1px;
+  transition: background 0.3s, color 0.3s, box-shadow 0.3s, transform 0.2s;
 }
-.feedback-form button:hover {
-  background: #0056b3;
-} 
+
+.feedback-form button:hover:not(:disabled) {
+  background: #cd853f;
+  color: #fff;
+  box-shadow: 0 4px 16px #cd853f, 0 0 8px #daa520;
+  transform: scale(1.05) rotate(-2deg);
+}
+
+.feedback-form button:disabled {
+  background: #d2b48c;
+  color: #aaa;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.feedback-form span {
+  color: #d2691e;
+  font-weight: bold;
+  font-size: 0.95rem;
+  display: block;
+  margin-top: -0.5rem;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 1px 2px #fff;
+}
+
+.success-message {
+  background: #f0e68c;
+  color: #5d4e37;
+  border-radius: 14px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  font-family: 'Creepster', cursive;
+  font-size: 1.5rem;
+  box-shadow: 0 2px 12px #d2b48c;
+  margin: 2rem auto;
+  max-width: 400px;
+  border: 2px solid #d2b48c;
+  letter-spacing: 1px;
+}
+
+.success-message button {
+  margin-top: 1.2rem;
+  background: #daa520;
+  color: #5d4e37;
+  font-family: 'Creepster', cursive;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  box-shadow: 0 2px 8px #d2b48c;
+  transition: background 0.3s, color 0.3s, box-shadow 0.3s, transform 0.2s;
+}
+
+.success-message button:hover {
+  background: #cd853f;
+  color: #fff;
+  box-shadow: 0 4px 16px #cd853f, 0 0 8px #daa520;
+  transform: scale(1.05) rotate(2deg);
+}
+
+
+
+
+@media (max-width: 600px) {
+  .feedback-form, .success-message {
+    padding: 1.2rem 0.5rem;
+    font-size: 1rem;
+  }
+}

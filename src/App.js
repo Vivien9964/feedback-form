@@ -1,14 +1,14 @@
 import React from 'react';
-import FeedbackForm from './components/FeedbackForm';
+import { FeedbackForm } from './components';
+import './components/FeedbackForm.css';
+import FallingLeaves from './components/FallingLeaves';
 
-// The main App component
 function App() {
   return (
-    <div className="App">
-      
-      <h1>Service Feedback</h1>
+    <>
+      <FallingLeaves />
       <FeedbackForm />
-    </div>
+    </>
   );
 }
 
